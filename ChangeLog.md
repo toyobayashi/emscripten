@@ -20,6 +20,8 @@ See docs/process.md for more on how version tagging works.
 
 3.1.15
 ------
+- Old method of metadata extraction via wasm-emscripten-finalize removed
+  in favor of local python code. (#16529)
 - Post-link metadata extraction switched from wasm-emscripten-finalize
   (binaryen) to python code within emscripten.  This change should have no
   semantic effect, but can temporarily be reverted by setting
