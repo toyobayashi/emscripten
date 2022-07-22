@@ -5,6 +5,7 @@
 
 import contextlib
 import os
+import shutil
 import sys
 from pathlib import Path
 
@@ -93,3 +94,30 @@ def write_binary(file_path, contents):
   """Write to a file opened in binary mode"""
   with open(file_path, 'wb') as fh:
     fh.write(contents)
+
+
+def delete_file(filename):
+  """Delete a file (if it exists)."""
+  if not os.path.exists(filename):
+    return
+  os.remove(filename)
+
+
+def delete_dir(dirname):
+  """Delete a directory (if it exists)."""
+  if not os.path.exists(dirname):
+    return
+  shutil.rmtree(dirname)
+
+
+def delete_contents(dirname):
+  """Delete the contents of a directory without removing
+  the directory itself."""
+  if not os.path.exists(dirname):
+    return
+  for entry in os.listdir(dirname):
+    entry = os.path.join(dirname, entry)
+    if os.path.isdir(entry):
+      delete_dir(entry)
+    else:
+      delete_file(entry)
